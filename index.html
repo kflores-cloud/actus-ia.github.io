@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Newsletter Actus IA</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+      color: #222;
+    }
+    header {
+      background: #5c67f2;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    section {
+      padding: 40px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    iframe {
+      width: 100%;
+      height: 800px;
+      border: none;
+    }
+    .formulario {
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 12px;
+      background: #f0f4f8;
+    }
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 12px 24px;
+      background: #5c67f2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #mensaje-suscripcion {
+      color: green;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📩 Boletín Diario de Actus IA</h1>
+    <p>Noticias y herramientas de inteligencia artificial todos los días</p>
+  </header>
+
+  <section>
+    <h2>📰 Último boletín</h2>
+    <!-- Este archivo lo sube automáticamente tu Apps Script a GitHub -->
+    <iframe src="newsletter_actual.html"></iframe>
+  </section>
+
+  <section class="formulario">
+    <h2>Suscríbete al Newsletter</h2>
+    <p>Recibe cada día las noticias más importantes de inteligencia artificial en tu correo.</p>
+    <form id="formulario-suscripcion">
+      <input type="email" id="email" name="email" placeholder="Tu correo electrónico" required>
+      <button type="submit">Suscribirme</button>
+    </form>
+    <p id="mensaje-suscripcion"></p>
+  </section>
+
+  <script>
+    document.getElementById("formulario-suscripcion").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const mensaje = document.getElementById("mensaje-suscripcion");
+
+      fetch("https://script.google.com/macros/s/YOUR_DEPLOYED_WEBAPP_URL/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: `email=${encodeURIComponent(email)}`
+      });
+
+      mensaje.textContent = "¡Gracias por suscribirte!";
+      document.getElementById("formulario-suscripcion").reset();
+    });
+  </script>
+
+</body>
+</html>
